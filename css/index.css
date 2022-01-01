@@ -56,10 +56,19 @@ body {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
+  position: relative;
 }
 
-.paint-area-container canvas {
+.paint-area-container .save-canvas,
+.paint-area-container .draw-canvas {
+  position: absolute;
+  left: 0;
+  top: 0;
   height: 100%;
   width: 100%;
+}
+
+.paint-area-container .save-canvas {
+  z-index: -1;
 }
 /*# sourceMappingURL=index.css.map */

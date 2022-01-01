@@ -43,8 +43,18 @@ body {
 .paint-area-container {
   flex: 1;
 
-  canvas {
+  position: relative;
+
+  .save-canvas,
+  .draw-canvas {
+    position: absolute;
+    left: 0;
+    top: 0;
     height: 100%;
     width: 100%;
+  }
+
+  .save-canvas {
+    z-index: -1;
   }
 }

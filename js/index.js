@@ -13,12 +13,16 @@ import {
 
 console.log('Hello world');
 
-const canvas = document.getElementById('paint-area-canvas');
+const canvas = document.getElementById('paint-area-canvas'),
+  backgroundCanvas = document.getElementById('drawing-store-canvas');
 
 function setCanvasDimensions() {
   const canvasStyleProps = window.getComputedStyle(canvas);
   canvas.width = canvasStyleProps.width.split('px')[0];
   canvas.height = canvasStyleProps.height.split('px')[0];
+
+  backgroundCanvas.width = canvasStyleProps.width.split('px')[0];
+  backgroundCanvas.height = canvasStyleProps.height.split('px')[0];
 }
 
 setCanvasDimensions();

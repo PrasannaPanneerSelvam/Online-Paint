@@ -46,9 +46,6 @@ class SplineOperation {
     } else if (this.#operation === 'control2') {
       this.#point4X = x;
       this.#point4Y = y;
-    } else {
-      this.#operation = '';
-      this.stopOperation();
     }
   }
 
@@ -58,8 +55,7 @@ class SplineOperation {
     } else if (this.#operation === 'control1') {
       this.#operation = 'control2';
     } else {
-      this.#operation = '';
-      this.stopOperation();
+      this.startNewOperation(this.#canvas);
     }
   }
 
