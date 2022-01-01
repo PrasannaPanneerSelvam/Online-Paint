@@ -9,8 +9,19 @@
     <link rel="stylesheet" href="./css/index.css" />
   </head>
   <body>
-    <div class="paint-area-container">
-      <canvas id="paint-area-canvas"></canvas>
+    <div class="app-container">
+      <nav class="tools-navbar">
+        <div class="tools-container">
+          <div class="tool-box" id="line-tool"></div>
+          <div class="tool-box" id="spline-tool"></div>
+          <div class="tool-box" id="rectangle-tool"></div>
+          <div class="tool-box" id="ellipse-tool"></div>
+          <div class="tool-box"></div>
+        </div>
+      </nav>
+      <div class="paint-area-container">
+        <canvas id="paint-area-canvas"></canvas>
+      </div>
     </div>
 
     <script src="./js/index.js" type="module"></script>

@@ -4,4 +4,62 @@
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
+
+body {
+  width: 100vw;
+  height: 100vh;
+}
+
+.app-container {
+  height: 100%;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.tools-navbar {
+  height: 100%;
+  width: 9%;
+  background-color: #000000;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 6px;
+}
+
+.tools-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -ms-flex-line-pack: start;
+      align-content: flex-start;
+  gap: 4px;
+}
+
+.tool-box {
+  height: 30px;
+  width: 30px;
+  background-color: white;
+  border-radius: 10%;
+}
+
+.paint-area-container {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.paint-area-container canvas {
+  height: 100%;
+  width: 100%;
+}
 /*# sourceMappingURL=index.css.map */

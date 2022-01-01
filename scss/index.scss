@@ -4,5 +4,47 @@
   box-sizing: border-box;
 }
 
+body {
+  width: 100vw;
+  height: 100vh;
+}
+
+.app-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+}
+
+.tools-navbar {
+  height: 100%;
+  width: 9%;
+  background-color: #000000;
+
+  display: flex;
+  align-items: center;
+  padding: 6px;
+}
+
+.tools-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-content: flex-start;
+  gap: 4px;
+}
+
+.tool-box {
+  height: 30px;
+  width: 30px;
+  background-color: white;
+  border-radius: 10%;
+}
+
 .paint-area-container {
+  flex: 1;
+
+  canvas {
+    height: 100%;
+    width: 100%;
+  }
 }

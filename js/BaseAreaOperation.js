@@ -9,6 +9,7 @@ class BaseAreaOperation {
   #startY;
   #drawShapeCallback;
   #eventMap;
+  #canvasOffset;
 
   constructor(drawShapeCallback) {
     this.#drawShapeCallback = drawShapeCallback;
@@ -23,19 +24,27 @@ class BaseAreaOperation {
   #setCanvasProps(inpCanvas) {
     this.#canvas = inpCanvas;
     this.#ctx = this.#canvas.getContext('2d');
+
+    const { x, y } = this.#canvas.getBoundingClientRect();
+    this.#canvasOffset = { x, y };
   }
 
   #startDrawing({ x, y }) {
+    x -= this.#canvasOffset.x;
+    y -= this.#canvasOffset.y;
     this.#startX = x;
     this.#startY = y;
   }
 
-  #endDrawing({ x, y }) {
+  #endDrawing() {
     this.#startX = null;
     this.#startY = null;
   }
 
   #drawLine({ x, y }) {
+    x -= this.#canvasOffset.x;
+    y -= this.#canvasOffset.y;
+
     if (this.#startX === null) return;
 
     this.#ctx.clearRect(0, 0, this.#canvas.width, this.#canvas.height);

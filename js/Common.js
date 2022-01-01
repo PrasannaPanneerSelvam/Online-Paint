@@ -8,4 +8,4 @@ function detachEvents(element, eventMap) {
     element.removeEventListener(eventName, eventFn);
 }
 
-module.exports = { attachEvents, detachEvents };
+export { attachEvents, detachEvents };

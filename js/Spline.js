@@ -15,6 +15,7 @@ class SplineOperation {
   #point4Y;
   #operation;
   #eventMap;
+  #canvasOffset;
 
   constructor() {
     this.#eventMap = {
@@ -28,9 +29,14 @@ class SplineOperation {
   #setCanvasProps(inpCanvas) {
     this.#canvas = inpCanvas;
     this.#ctx = this.#canvas.getContext('2d');
+
+    const { x, y } = this.#canvas.getBoundingClientRect();
+    this.#canvasOffset = { x, y };
   }
 
   #startDrawing({ x, y }) {
+    x -= this.#canvasOffset.x;
+    y -= this.#canvasOffset.y;
     if (this.#operation === 'line') {
       this.#point1X = x;
       this.#point1Y = y;
@@ -46,7 +52,7 @@ class SplineOperation {
     }
   }
 
-  #endDrawing({ x, y }) {
+  #endDrawing() {
     if (this.#operation === 'line') {
       this.#operation = 'control1';
     } else if (this.#operation === 'control1') {
@@ -58,6 +64,9 @@ class SplineOperation {
   }
 
   #drawSpline({ x, y }) {
+    x -= this.#canvasOffset.x;
+    y -= this.#canvasOffset.y;
+
     if (this.#operation === 'line' && this.#point1X !== null) {
       this.#ctx.clearRect(0, 0, this.#canvas.width, this.#canvas.height);
 
