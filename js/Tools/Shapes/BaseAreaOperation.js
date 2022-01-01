@@ -1,4 +1,4 @@
-import { attachEvents, detachEvents } from './Common.js';
+import { attachEvents, detachEvents } from './../Common.js';
 
 /********************** Base Area ************************/
 
@@ -17,7 +17,7 @@ class BaseAreaOperation {
       mousedown: this.#startDrawing.bind(this),
       mouseup: this.#endDrawing.bind(this),
       mouseleave: this.#endDrawing.bind(this),
-      mousemove: this.#drawLine.bind(this),
+      mousemove: this.#drawShape.bind(this),
     };
   }
 
@@ -41,7 +41,7 @@ class BaseAreaOperation {
     this.#startY = null;
   }
 
-  #drawLine({ x, y }) {
+  #drawShape({ x, y }) {
     x -= this.#canvasOffset.x;
     y -= this.#canvasOffset.y;
 

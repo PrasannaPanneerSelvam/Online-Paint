@@ -1,7 +1,15 @@
-import LineOperation from './Line.js';
-import RectangleOperation from './Rectangle.js';
-import SplineOperation from './Spline.js';
-import EllipseOperation from './Ellipse.js';
+import {
+  LineOperation,
+  RectangleOperation,
+  SplineOperation,
+  EllipseOperation,
+  RightAngledTriangleOperation,
+  TriangleOperation,
+  DiamondOperation,
+  PenOperation,
+  BrushOperation,
+  EraserOperation,
+} from './Tools/Tools.js';
 
 console.log('Hello world');
 
@@ -18,18 +26,46 @@ window.addEventListener('resize', setCanvasDimensions);
 
 let currentOperation;
 
+const ids = [
+  'line-tool',
+  'spline-tool',
+  'rectangle-tool',
+  'ellipse-tool',
+  'right-angled-triangle-tool',
+  'triangle-tool',
+  'diamond-tool',
+  'pen-tool',
+  'brush-tool',
+  'eraser-tool',
+];
+
 const toolIdMap = {
   'line-tool': LineOperation,
   'spline-tool': SplineOperation,
   'rectangle-tool': RectangleOperation,
   'ellipse-tool': EllipseOperation,
+  'right-angled-triangle-tool': RightAngledTriangleOperation,
+  'triangle-tool': TriangleOperation,
+  'diamond-tool': DiamondOperation,
+  'pen-tool': PenOperation,
+  'brush-tool': BrushOperation,
+  'eraser-tool': EraserOperation,
 };
 
-for (const [id, toolConstructor] of Object.entries(toolIdMap)) {
-  const toolButton = document.getElementById(id);
+const toolBoxes = document.getElementsByClassName('tool-box');
+
+for (let idx = 0; idx < ids.length; idx++) {
+  const toolButton = toolBoxes[idx];
+
+  if (!toolButton) {
+    console.error('Insufficient tool boxes');
+    break;
+  }
+
+  toolButton.id = ids[idx];
   toolButton.addEventListener('click', () => {
     currentOperation?.stopOperation();
-    currentOperation = new toolConstructor();
+    currentOperation = new toolIdMap[toolButton.id]();
     currentOperation.startNewOperation(canvas);
   });
 }

@@ -12,7 +12,15 @@ class EllipseOperation extends BaseAreaOperation {
 
       ctx.beginPath();
       ctx.strokeStyle = 'red';
-      ctx.ellipse(startX + xC, startY + yC, delX, delY, 0, 0, 2 * Math.PI);
+      ctx.ellipse(
+        startX + xC,
+        startY + yC,
+        Math.abs(delX) / 2,
+        Math.abs(delY) / 2,
+        0,
+        0,
+        2 * Math.PI
+      );
       ctx.stroke();
     }
 

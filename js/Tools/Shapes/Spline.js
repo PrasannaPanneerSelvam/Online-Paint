@@ -1,4 +1,4 @@
-import { attachEvents, detachEvents } from './Common.js';
+import { attachEvents, detachEvents } from './../Common.js';
 
 /********************** Spline ************************/
 

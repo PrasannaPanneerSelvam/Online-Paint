@@ -8,4 +8,8 @@ function detachEvents(element, eventMap) {
     element.removeEventListener(eventName, eventFn);
 }
 
-export { attachEvents, detachEvents };
+function midRange(start, end) {
+  return (end - start) / 2 + start;
+}
+
+export { attachEvents, detachEvents, midRange };
