@@ -66,7 +66,7 @@ class PaintApp {
     this.#operationQueue = new OperationQueue({
       height,
       width,
-      maxCapacity: 5,
+      maxCapacity: 10,
     });
   }
 
@@ -112,8 +112,13 @@ class PaintApp {
     const latestCanvasData = this.#operationQueue.undo();
     console.log('undo', latestCanvasData);
 
-    if (latestCanvasData !== null)
+    if (latestCanvasData !== null) {
       this.#storeCtx.putImageData(latestCanvasData, 0, 0);
+    } else {
+      const height = this.#activeCanvas.height,
+        width = this.#activeCanvas.width;
+      this.#storeCtx.clearRect(0, 0, width, height);
+    }
   }
 
   #redo() {

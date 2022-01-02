@@ -11,6 +11,7 @@ class BaseAreaOperation {
   #eventMap;
   #canvasOffset;
   #drawingCompletionCallback;
+  #onprogress;
 
   constructor(drawShapeCallback) {
     this.#drawShapeCallback = drawShapeCallback;
@@ -36,13 +37,14 @@ class BaseAreaOperation {
     y -= this.#canvasOffset.y;
     this.#startX = x;
     this.#startY = y;
+    this.#onprogress = true;
   }
 
   #endDrawing() {
     this.#startX = null;
     this.#startY = null;
 
-    this.#drawingCompletionCallback();
+    if (this.#onprogress) this.#drawingCompletionCallback();
     this.startNewOperation(this.#canvas);
   }
 
@@ -68,14 +70,16 @@ class BaseAreaOperation {
   startNewOperation(inpCanvas, drawingCompletionCallback) {
     this.#startX = this.#startY = null;
     this.#setCanvasProps(inpCanvas);
+    this.#onprogress = false;
+
     this.#drawingCompletionCallback =
       drawingCompletionCallback ?? this.#drawingCompletionCallback;
+
     attachEvents(this.#canvas, this.#eventMap);
   }
 
   stopOperation() {
     detachEvents(this.#canvas, this.#eventMap);
-    this.#drawingCompletionCallback();
   }
 }
 

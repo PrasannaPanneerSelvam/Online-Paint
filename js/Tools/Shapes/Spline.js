@@ -16,6 +16,7 @@ class SplineOperation {
   #operation;
   #eventMap;
   #canvasOffset;
+  #onprogress;
   #drawingCompletionCallback;
 
   constructor() {
@@ -42,6 +43,7 @@ class SplineOperation {
     if (this.#operation === 'line') {
       this.#point1X = x;
       this.#point1Y = y;
+      this.#onprogress = true;
     } else if (this.#operation === 'control1') {
       this.#point3X = x;
       this.#point3Y = y;
@@ -57,6 +59,7 @@ class SplineOperation {
     } else if (this.#operation === 'control1') {
       this.#operation = 'control2';
     } else {
+      this.#onprogress = false;
       this.#drawingCompletionCallback();
       this.startNewOperation(this.#canvas);
     }
@@ -126,6 +129,7 @@ class SplineOperation {
       this.#point4Y =
         null;
     this.#operation = 'line';
+    this.#onprogress = false;
 
     this.#setCanvasProps(inpCanvas);
     this.#drawingCompletionCallback =
@@ -136,7 +140,7 @@ class SplineOperation {
 
   stopOperation() {
     detachEvents(this.#canvas, this.#eventMap);
-    this.#drawingCompletionCallback();
+    if (this.#onprogress) this.#drawingCompletionCallback();
   }
 }
 

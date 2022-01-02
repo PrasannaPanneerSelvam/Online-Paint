@@ -14,11 +14,11 @@ class RedoStack {
   }
 
   // TODO :: Remove if not needed
-  peek() {
-    const lastIndex = this.size - 1;
-    if (lastIndex === -1) return null;
-    return this.#dataArray[lastIndex];
-  }
+  // peekDummy() {
+  //   const lastIndex = this.size - 1;
+  //   if (lastIndex === -1) return null;
+  //   return this.#dataArray[lastIndex];
+  // }
 
   clear() {
     this.#dataArray = [];

@@ -5,12 +5,12 @@ import { attachEvents, detachEvents } from './../Common.js';
 class BaseTraceOperation {
   #canvas;
   #ctx;
-
   #toolOnBoard;
   #traceCallBack;
   #eventMap;
   #canvasOffset;
   #drawingCompletionCallback;
+  #onprogress;
 
   constructor(traceCallBack) {
     this.#traceCallBack = traceCallBack;
@@ -33,12 +33,13 @@ class BaseTraceOperation {
 
   #startDrawing() {
     this.#toolOnBoard = true;
+    this.#onprogress = true;
   }
 
   #endDrawing() {
     this.#toolOnBoard = false;
 
-    this.#drawingCompletionCallback();
+    if (this.#onprogress) this.#drawingCompletionCallback();
     this.startNewOperation(this.#canvas);
   }
 
@@ -60,8 +61,11 @@ class BaseTraceOperation {
   startNewOperation(inpCanvas, drawingCompletionCallback) {
     this.#toolOnBoard = false;
     this.#setCanvasProps(inpCanvas);
+    this.#onprogress = false;
+
     this.#drawingCompletionCallback =
       drawingCompletionCallback ?? this.#drawingCompletionCallback;
+
     attachEvents(this.#canvas, this.#eventMap);
   }
 
