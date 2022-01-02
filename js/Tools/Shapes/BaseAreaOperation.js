@@ -20,6 +20,7 @@ class BaseAreaOperation {
       mouseleave: this.#endDrawing.bind(this),
       mousemove: this.#drawShape.bind(this),
     };
+    this.#drawingCompletionCallback = () => {};
   }
 
   #setCanvasProps(inpCanvas) {
@@ -40,6 +41,9 @@ class BaseAreaOperation {
   #endDrawing() {
     this.#startX = null;
     this.#startY = null;
+
+    this.#drawingCompletionCallback();
+    this.startNewOperation(this.#canvas);
   }
 
   #drawShape({ x, y }) {
@@ -64,7 +68,8 @@ class BaseAreaOperation {
   startNewOperation(inpCanvas, drawingCompletionCallback) {
     this.#startX = this.#startY = null;
     this.#setCanvasProps(inpCanvas);
-    this.#drawingCompletionCallback = drawingCompletionCallback ?? (() => {});
+    this.#drawingCompletionCallback =
+      drawingCompletionCallback ?? this.#drawingCompletionCallback;
     attachEvents(this.#canvas, this.#eventMap);
   }
 

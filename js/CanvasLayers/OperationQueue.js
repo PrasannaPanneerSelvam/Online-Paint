@@ -45,19 +45,21 @@ class OperationQueue {
   undo() {
     const latestLayerData = this.#canvasDataArray.pop_back();
 
-    if (latestLayerData === null) return this;
+    if (latestLayerData === null) return null;
 
     this.#redoStack.push(latestLayerData);
-    return this;
+
+    return this.#canvasDataArray.peek_back();
   }
 
   redo() {
     const latestLayerData = this.#redoStack.pop();
 
-    if (latestLayerData === null) return this;
+    if (latestLayerData === null) return null;
 
     this.#canvasDataArray.push_back(latestLayerData);
-    return this;
+
+    return this.#canvasDataArray.peek_back();
   }
 }
 

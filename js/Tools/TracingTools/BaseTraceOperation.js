@@ -20,6 +20,7 @@ class BaseTraceOperation {
       mouseleave: this.#endDrawing.bind(this),
       mousemove: this.#traceCursor.bind(this),
     };
+    this.#drawingCompletionCallback = () => {};
   }
 
   #setCanvasProps(inpCanvas) {
@@ -36,6 +37,9 @@ class BaseTraceOperation {
 
   #endDrawing() {
     this.#toolOnBoard = false;
+
+    this.#drawingCompletionCallback();
+    this.startNewOperation(this.#canvas);
   }
 
   #traceCursor({ x, y }) {
@@ -56,7 +60,8 @@ class BaseTraceOperation {
   startNewOperation(inpCanvas, drawingCompletionCallback) {
     this.#toolOnBoard = false;
     this.#setCanvasProps(inpCanvas);
-    this.#drawingCompletionCallback = drawingCompletionCallback ?? (() => {});
+    this.#drawingCompletionCallback =
+      drawingCompletionCallback ?? this.#drawingCompletionCallback;
     attachEvents(this.#canvas, this.#eventMap);
   }
 

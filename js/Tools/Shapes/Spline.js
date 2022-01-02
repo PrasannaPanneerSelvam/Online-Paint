@@ -25,6 +25,7 @@ class SplineOperation {
       mouseleave: this.#endDrawing.bind(this),
       mousemove: this.#drawSpline.bind(this),
     };
+    this.#drawingCompletionCallback = () => {};
   }
 
   #setCanvasProps(inpCanvas) {
@@ -56,6 +57,7 @@ class SplineOperation {
     } else if (this.#operation === 'control1') {
       this.#operation = 'control2';
     } else {
+      this.#drawingCompletionCallback();
       this.startNewOperation(this.#canvas);
     }
   }
@@ -126,7 +128,8 @@ class SplineOperation {
     this.#operation = 'line';
 
     this.#setCanvasProps(inpCanvas);
-    this.#drawingCompletionCallback = drawingCompletionCallback ?? (() => {});
+    this.#drawingCompletionCallback =
+      drawingCompletionCallback ?? this.#drawingCompletionCallback;
 
     attachEvents(this.#canvas, this.#eventMap);
   }
