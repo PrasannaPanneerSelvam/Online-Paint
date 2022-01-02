@@ -16,6 +16,7 @@ class SplineOperation {
   #operation;
   #eventMap;
   #canvasOffset;
+  #drawingCompletionCallback;
 
   constructor() {
     this.#eventMap = {
@@ -112,7 +113,7 @@ class SplineOperation {
     }
   }
 
-  startNewOperation(inpCanvas) {
+  startNewOperation(inpCanvas, drawingCompletionCallback) {
     this.#point1X =
       this.#point1Y =
       this.#point2X =
@@ -125,11 +126,14 @@ class SplineOperation {
     this.#operation = 'line';
 
     this.#setCanvasProps(inpCanvas);
+    this.#drawingCompletionCallback = drawingCompletionCallback ?? (() => {});
+
     attachEvents(this.#canvas, this.#eventMap);
   }
 
   stopOperation() {
     detachEvents(this.#canvas, this.#eventMap);
+    this.#drawingCompletionCallback();
   }
 }
 

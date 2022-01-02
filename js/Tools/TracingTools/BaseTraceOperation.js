@@ -10,6 +10,7 @@ class BaseTraceOperation {
   #traceCallBack;
   #eventMap;
   #canvasOffset;
+  #drawingCompletionCallback;
 
   constructor(traceCallBack) {
     this.#traceCallBack = traceCallBack;
@@ -52,14 +53,16 @@ class BaseTraceOperation {
     this.#traceCallBack(callBackInputInfo);
   }
 
-  startNewOperation(inpCanvas) {
+  startNewOperation(inpCanvas, drawingCompletionCallback) {
     this.#toolOnBoard = false;
     this.#setCanvasProps(inpCanvas);
+    this.#drawingCompletionCallback = drawingCompletionCallback ?? (() => {});
     attachEvents(this.#canvas, this.#eventMap);
   }
 
   stopOperation() {
     detachEvents(this.#canvas, this.#eventMap);
+    this.#drawingCompletionCallback();
   }
 }
 

@@ -2,15 +2,22 @@ import Deque from './Deque.js';
 import RedoStack from './RedoStack.js';
 import { mergeTwoLayers } from './Utils.js';
 
-class OperationDeque {
+class OperationQueue {
   #canvasDataArray;
   #redoStack;
   #maxCapacity;
 
-  constructor() {
+  #height;
+  #width;
+
+  constructor({ height, width, maxCapacity }) {
     this.#canvasDataArray = new Deque();
     this.#redoStack = new RedoStack();
-    this.#maxCapacity = 5;
+    this.#maxCapacity = maxCapacity;
+
+    // TODO :: Take from the caller function dynamically?
+    this.#height = height;
+    this.#width = width;
   }
 
   addLayer(newData) {
@@ -22,7 +29,14 @@ class OperationDeque {
     const firstLayer = this.#canvasDataArray.pop_front(),
       secondLayer = this.#canvasDataArray.pop_front();
 
-    const mergedLayer = mergeTwoLayers(firstLayer, secondLayer);
+    const mergeDetails = {
+      existingData: firstLayer,
+      newData: secondLayer,
+      height: this.#height,
+      width: this.#width,
+    };
+
+    const mergedLayer = mergeTwoLayers(mergeDetails);
     this.#canvasDataArray.push_front(mergedLayer);
 
     return this;
@@ -47,4 +61,4 @@ class OperationDeque {
   }
 }
 
-export default OperationDeque;
+export default OperationQueue;

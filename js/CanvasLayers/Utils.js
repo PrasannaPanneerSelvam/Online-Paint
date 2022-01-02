@@ -1,8 +1,4 @@
-const height = 200,
-  width = 200;
-
-// Numbering starts with depth
-function mergeTwoLayers(canvasLevelOneData, canvasLevelTwoData) {
+function mergeTwoLayers({ existingData, newData, height, width }) {
   const totalRow = height,
     totalCol = width;
 
@@ -12,8 +8,8 @@ function mergeTwoLayers(canvasLevelOneData, canvasLevelTwoData) {
       const rgbaTopData = [],
         rgbaBottomData = [];
       for (let cell = 0; cell < 4; cell++) {
-        rgbaTopData.push(canvasLevelOneData[idx]);
-        rgbaBottomData.push(canvasLevelTwoData[idx]);
+        rgbaTopData.push(existingData[idx]);
+        rgbaBottomData.push(newData[idx]);
       }
 
       // Consume only alpha value 1 cell
@@ -25,6 +21,8 @@ function mergeTwoLayers(canvasLevelOneData, canvasLevelTwoData) {
       }
     }
   }
+
+  return result;
 }
 
 export { mergeTwoLayers };

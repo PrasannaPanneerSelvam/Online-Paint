@@ -1,16 +1,4 @@
-import {
-  LineOperation,
-  RectangleOperation,
-  SplineOperation,
-  EllipseOperation,
-  RightAngledTriangleOperation,
-  TriangleOperation,
-  DiamondOperation,
-  PenOperation,
-  BrushOperation,
-  EraserOperation,
-} from './Tools/Tools.js';
-
+import PaintApp from './CanvasLayers/PaintApp.js';
 console.log('Hello world');
 
 const canvas = document.getElementById('paint-area-canvas'),
@@ -28,48 +16,7 @@ function setCanvasDimensions() {
 setCanvasDimensions();
 window.addEventListener('resize', setCanvasDimensions);
 
-let currentOperation;
+const toolBoxClassName = 'tool-box';
 
-const ids = [
-  'line-tool',
-  'spline-tool',
-  'rectangle-tool',
-  'ellipse-tool',
-  'right-angled-triangle-tool',
-  'triangle-tool',
-  'diamond-tool',
-  'pen-tool',
-  'brush-tool',
-  'eraser-tool',
-];
-
-const toolIdMap = {
-  'line-tool': LineOperation,
-  'spline-tool': SplineOperation,
-  'rectangle-tool': RectangleOperation,
-  'ellipse-tool': EllipseOperation,
-  'right-angled-triangle-tool': RightAngledTriangleOperation,
-  'triangle-tool': TriangleOperation,
-  'diamond-tool': DiamondOperation,
-  'pen-tool': PenOperation,
-  'brush-tool': BrushOperation,
-  'eraser-tool': EraserOperation,
-};
-
-const toolBoxes = document.getElementsByClassName('tool-box');
-
-for (let idx = 0; idx < ids.length; idx++) {
-  const toolButton = toolBoxes[idx];
-
-  if (!toolButton) {
-    console.error('Insufficient tool boxes');
-    break;
-  }
-
-  toolButton.id = ids[idx];
-  toolButton.addEventListener('click', () => {
-    currentOperation?.stopOperation();
-    currentOperation = new toolIdMap[toolButton.id]();
-    currentOperation.startNewOperation(canvas);
-  });
-}
+const paintApp = new PaintApp(backgroundCanvas, canvas);
+paintApp.startApp(toolBoxClassName);
