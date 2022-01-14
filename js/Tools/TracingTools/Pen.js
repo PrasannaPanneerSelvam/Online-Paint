@@ -3,9 +3,9 @@ import BaseTraceOperation from './BaseTraceOperation.js';
 class PenOperation extends BaseTraceOperation {
   constructor() {
     const pointSize = 1;
-    function tracePenTool({ ctx, x, y }) {
+    function tracePenTool({ ctx, x, y, selectedColor }) {
       ctx.beginPath();
-      ctx.strokeStyle = 'red';
+      ctx.strokeStyle = selectedColor;
       ctx.rect(x, y, pointSize, pointSize);
       ctx.stroke();
     }

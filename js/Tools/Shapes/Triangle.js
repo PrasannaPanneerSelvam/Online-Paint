@@ -5,12 +5,12 @@ import { midRange } from './../Common.js';
 
 class TriangleOperation extends BaseAreaOperation {
   constructor() {
-    function drawFunction({ ctx, startX, startY, endX, endY }) {
+    function drawFunction({ ctx, startX, startY, endX, endY, selectedColor }) {
       const bottomLeft = [startX, endY],
         topCenter = [midRange(startX, endX), startY];
 
       ctx.beginPath();
-      ctx.strokeStyle = 'red';
+      ctx.strokeStyle = selectedColor;
 
       ctx.moveTo(...topCenter);
       ctx.lineTo(endX, endY);

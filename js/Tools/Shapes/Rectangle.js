@@ -4,12 +4,12 @@ import BaseAreaOperation from './BaseAreaOperation.js';
 
 class RectangleOperation extends BaseAreaOperation {
   constructor() {
-    function drawFunction({ ctx, startX, startY, endX, endY }) {
+    function drawFunction({ ctx, startX, startY, endX, endY, selectedColor }) {
       const topRight = [endX, startY],
         bottomLeft = [startX, endY];
 
       ctx.beginPath();
-      ctx.strokeStyle = 'red';
+      ctx.strokeStyle = selectedColor;
 
       ctx.moveTo(startX, startY);
       ctx.lineTo(...topRight);

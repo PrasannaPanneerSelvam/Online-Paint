@@ -1,4 +1,4 @@
-import { attachEvents, detachEvents } from './../Common.js';
+import { attachEvents, detachEvents, getColor } from './../Common.js';
 
 /********************** Base Tracing Logic ************************/
 
@@ -53,6 +53,7 @@ class BaseTraceOperation {
       ctx: this.#ctx,
       x,
       y,
+      selectedColor: getColor(),
     };
 
     this.#traceCallBack(callBackInputInfo);

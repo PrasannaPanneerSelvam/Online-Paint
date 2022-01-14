@@ -5,12 +5,12 @@ import { midRange } from './../Common.js';
 
 class DiamondOperation extends BaseAreaOperation {
   constructor() {
-    function drawFunction({ ctx, startX, startY, endX, endY }) {
+    function drawFunction({ ctx, startX, startY, endX, endY, selectedColor }) {
       const midX = midRange(startX, endX),
         midY = midRange(startY, endY);
 
       ctx.beginPath();
-      ctx.strokeStyle = 'red';
+      ctx.strokeStyle = selectedColor;
 
       ctx.moveTo(midX, startY);
       ctx.lineTo(endX, midY);

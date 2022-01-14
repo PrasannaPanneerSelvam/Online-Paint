@@ -4,11 +4,11 @@ import BaseAreaOperation from './BaseAreaOperation.js';
 
 class RightAngledTriangleOperation extends BaseAreaOperation {
   constructor() {
-    function drawFunction({ ctx, startX, startY, endX, endY }) {
+    function drawFunction({ ctx, startX, startY, endX, endY, selectedColor }) {
       const bottomLeft = [startX, endY];
 
       ctx.beginPath();
-      ctx.strokeStyle = 'red';
+      ctx.strokeStyle = selectedColor;
 
       ctx.moveTo(startX, startY);
       ctx.lineTo(endX, endY);

@@ -1,5 +1,6 @@
 import OperationQueue from './OperationQueue.js';
 import { mergeTwoLayers } from './Utils.js';
+import { setDefaultColor, colorChanged } from '../Tools/colorPicker.js';
 
 import {
   LineOperation,
@@ -134,6 +135,7 @@ class PaintApp {
 
     const redoButton = document.getElementById('redo'),
       undoButton = document.getElementById('undo');
+    const colorPicker = document.getElementById('colorPicker');
 
     const drawingCompletionCallback =
         this.#storeDataToBackgroundCanvas.bind(this),
@@ -162,6 +164,9 @@ class PaintApp {
 
     undoButton.addEventListener('click', this.#undo.bind(this));
     redoButton.addEventListener('click', this.#redo.bind(this));
+
+    setDefaultColor(colorPicker);
+    colorPicker.addEventListener('change', colorChanged);
   }
 }
 

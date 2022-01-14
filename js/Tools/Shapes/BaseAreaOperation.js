@@ -1,4 +1,4 @@
-import { attachEvents, detachEvents } from './../Common.js';
+import { attachEvents, detachEvents, getColor } from './../Common.js';
 
 /********************** Base Area ************************/
 
@@ -62,6 +62,7 @@ class BaseAreaOperation {
       startY: this.#startY,
       endX: x,
       endY: y,
+      selectedColor: getColor(),
     };
 
     this.#drawShapeCallback(callBackInputInfo);

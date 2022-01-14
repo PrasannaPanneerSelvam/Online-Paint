@@ -1,4 +1,4 @@
-import { attachEvents, detachEvents } from './../Common.js';
+import { attachEvents, detachEvents, getColor } from './../Common.js';
 
 /********************** Spline ************************/
 
@@ -76,7 +76,7 @@ class SplineOperation {
       this.#point2Y = y;
 
       this.#ctx.beginPath();
-      this.#ctx.strokeStyle = 'red';
+      this.#ctx.strokeStyle = getColor();
       this.#ctx.moveTo(this.#point1X, this.#point1Y);
       this.#ctx.lineTo(this.#point2X, this.#point2Y);
       this.#ctx.closePath();
@@ -88,7 +88,7 @@ class SplineOperation {
       this.#point3Y = y;
 
       this.#ctx.beginPath();
-      this.#ctx.strokeStyle = 'red';
+      this.#ctx.strokeStyle = getColor();
       this.#ctx.moveTo(this.#point1X, this.#point1Y);
       this.#ctx.quadraticCurveTo(
         this.#point3X,
@@ -104,7 +104,7 @@ class SplineOperation {
       this.#point4Y = y;
 
       this.#ctx.beginPath();
-      this.#ctx.strokeStyle = 'red';
+      this.#ctx.strokeStyle = getColor();
       this.#ctx.moveTo(this.#point1X, this.#point1Y);
       this.#ctx.bezierCurveTo(
         this.#point3X,

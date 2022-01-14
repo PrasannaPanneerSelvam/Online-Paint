@@ -4,14 +4,14 @@ import BaseAreaOperation from './BaseAreaOperation.js';
 
 class EllipseOperation extends BaseAreaOperation {
   constructor() {
-    function drawFunction({ ctx, startX, startY, endX, endY }) {
+    function drawFunction({ ctx, startX, startY, endX, endY, selectedColor }) {
       const delX = endX - startX,
         delY = endY - startY,
         xC = delX / 2,
         yC = delY / 2;
 
       ctx.beginPath();
-      ctx.strokeStyle = 'red';
+      ctx.strokeStyle = selectedColor;
       ctx.ellipse(
         startX + xC,
         startY + yC,
